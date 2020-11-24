@@ -1,4 +1,5 @@
 .idea
+newsportal.iml
 /src/main/webapp/dist
 /src/main/webapp/plugins
 
