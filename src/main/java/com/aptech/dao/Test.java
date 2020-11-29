@@ -1,16 +1,15 @@
 package com.aptech.dao;
 
+import com.aptech.models.Category;
 import com.aptech.models.User;
+
+import java.util.List;
 
 public class Test {
     public static void main(String[] args) {
-        User user=new User();
-        user.setUsername("admin");
-        user.setEmail("admin@gmail.com");
-        user.setPassword("a123");
-
-        UserDao.save(user);
-
-        System.out.println("user saved.");
+        List<Category> users=CategoryDao.getAllCategories();
+        for (Category u:users) {
+            System.out.println(u.getName());
+        }
     }
 }
