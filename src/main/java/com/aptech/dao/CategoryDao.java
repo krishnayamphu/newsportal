@@ -59,4 +59,53 @@ public class CategoryDao {
         return status;
     }
 
+    //get category by id
+    public static Category getCategoryById(int categoryId) {
+        Category category = null;
+        String sql = "SELECT * FROM category WHERE id=?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, categoryId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                category = new Category();
+                category.setId(rs.getInt("id"));
+                category.setName(rs.getString("name"));
+                category.setCreatedAt(rs.getString("created_at"));
+                category.setUpdatedAt(rs.getString("updated_at"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return category;
+    }
+
+    //update category by id
+    public static int update(Category category) {
+        int status = 0;
+        String sql = "UPDATE category SET name=? WHERE id=?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, category.getName());
+            ps.setInt(2, category.getId());
+            status = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
+
+    //delete category
+    public static int deleteCategory(int categoryId) {
+        String sql = "DELETE FROM category WHERE id=?";
+        int status = 0;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, categoryId);
+            status = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
 }

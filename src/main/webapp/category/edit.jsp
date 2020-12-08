@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>NewsPortal | Categories</title>
+    <title>NewsPortal | Edit Category</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -234,14 +234,14 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">All Categories
-                            <a class="btn btn-primary" href="/category/create">New Category</a>
+                        <h1 class="m-0 text-dark">Create New Category
                         </h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Categories</li>
+                            <li class="breadcrumb-item"><a href="#">Category</a></li>
+                            <li class="breadcrumb-item active">Edit</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -258,66 +258,22 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <!-- /.card-header -->
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr>
-                                    <th style="width: 10px">#</th>
-                                    <th>Name</th>
-                                    <th>Created Date</th>
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach var="category" items="${categories}">
-                                    <tr>
-                                        <td>${category.id}</td>
-                                        <td>${category.name}</td>
-                                        <td>${category.createdAt}</td>
-                                        <td>
-                                            <div class="">
-                                                <a class="btn btn-success" href="/newsportal/category/edit?id=${category.id}">
-                                                    Edit
-                                                </a>
-                                                    <%-- start modal --%>
-                                                <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal${category.id}">
-                                                    Delete
-                                                </button>
+                            <!-- form start -->
+                            <form action="edit" method="post">
+                                <div class="card-body">
+                                    <input type="hidden" name="id" value="${category.id}">
+                                    <div class="form-group">
+                                        <label>Category Name</label>
+                                        <input type="text" class="form-control" name="name"
+                                               value="${category.name}" placeholder="Enter Name">
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
 
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="modal${category.id}" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                                     aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Delete Category</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                Are sure want to delete this item?
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <form action="/newsportal/category" method="post">
-                                                                    <input type="hidden" name="id" value="${category.id}">
-
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                                                    </button>
-                                                                    <button type="submit" class="btn btn-primary">Confirm</button>
-
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                    <%-- end modal --%>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </form>
                         </div>
                         <!-- /.card -->
                     </div>

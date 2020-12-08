@@ -9,17 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet("/category")
-public class CategoryController extends HttpServlet {
+@WebServlet("/category/edit")
+public class CategoryEditController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        CategoryDao.deleteCategory(Integer.parseInt(request.getParameter("id")));
+        Category category=new Category();
+        category.setId(Integer.parseInt(request.getParameter("id")));
+        category.setName(request.getParameter("name"));
+        CategoryDao.update(category);
         response.sendRedirect("/newsportal/category");
     }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Category> categories= CategoryDao.getAllCategories();
-        request.setAttribute("categories",categories);
-        request.getRequestDispatcher("category/category.jsp").forward(request,response);
+        Category category = CategoryDao.getCategoryById(Integer.parseInt(request.getParameter("id")));
+        request.setAttribute("category",category);
+        request.getRequestDispatcher("edit.jsp").forward(request,response);
     }
 }
