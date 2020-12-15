@@ -234,14 +234,14 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">All Categories
-                            <a class="btn btn-primary" href="/category/create">New Category</a>
+                        <h1 class="m-0 text-dark">All Posts
+                            <a class="btn btn-primary" href="/posts/create">New Post</a>
                         </h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Categories</li>
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item active">Posts</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -254,7 +254,7 @@
             <div class="container-fluid">
                 <!-- Main row -->
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <!-- /.card-header -->
@@ -262,35 +262,37 @@
                                 <thead>
                                 <tr>
                                     <th style="width: 10px">#</th>
-                                    <th>Name</th>
+                                    <th>Title</th>
+                                    <th>Category</th>
                                     <th>Created Date</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach var="category" items="${categories}">
+                                <c:forEach var="post" items="${posts}">
                                     <tr>
-                                        <td>${category.id}</td>
-                                        <td>${category.name}</td>
-                                        <td>${category.createdAt}</td>
+                                        <td>${post.id}</td>
+                                        <td>${post.title}</td>
+                                        <td>${post.category}</td>
+                                        <td>${post.createdAt}</td>
                                         <td>
                                             <div class="">
-                                                <a class="btn btn-success" href="/newsportal/category/edit?id=${category.id}">
+                                                <a class="btn btn-success" href="/newsportal/post/edit?id=${post.id}">
                                                     Edit
                                                 </a>
                                                     <%-- start modal --%>
                                                 <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal${category.id}">
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal${post.id}">
                                                     Delete
                                                 </button>
 
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="modal${category.id}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                <div class="modal fade" id="modal${post.id}" tabindex="-1" aria-labelledby="exampleModalLabel"
                                                      aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Delete Category</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Delete Post</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -300,7 +302,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <form action="/newsportal/category" method="post">
-                                                                    <input type="hidden" name="id" value="${category.id}">
+                                                                    <input type="hidden" name="id" value="${post.id}">
 
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
                                                                     </button>

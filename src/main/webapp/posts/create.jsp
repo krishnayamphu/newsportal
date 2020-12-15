@@ -239,8 +239,8 @@
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Categories</a></li>
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item"><a href="posts">posts</a></li>
                             <li class="breadcrumb-item active">Create</li>
                         </ol>
                     </div><!-- /.col -->
@@ -273,7 +273,50 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Set Image</label>
-                                        <input type="file" class="form-control" name="image">
+                                        <%-- start modal --%>
+                                        <%-- Button trigger modal--%>
+                                        <button type="button" class="btn btn-default" data-toggle="modal"
+                                                data-target="#modalImg">
+                                            Choose File
+                                        </button>
+                                        <input type="text" name="image" id="myImage" class="form-control">
+                                        <%-- Modal --%>
+                                        <div class="modal fade" id="modalImg" tabindex="-1"
+                                             aria-labelledby="exampleModalLabel"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">All Media Files</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row row-cols-md-6">
+                                                            <c:forEach var="image" items="${images}">
+                                                                <div class="col mb-4">
+                                                                    <div class="card h-100">
+                                                                        <div class="card-body">
+                                                                            <a href="#!">
+                                                                                <img onclick="setImage('${image}')"  data-dismiss="modal" src="${pageContext.request.contextPath}/uploads/${image}" class="card-img-top">
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </c:forEach>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Close
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <%-- end modal --%>
                                     </div>
 
                                     <div class="form-group">
@@ -286,7 +329,6 @@
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
-
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Create</button>
                                 </div>
@@ -351,5 +393,11 @@
 <script src="http://localhost:8080/newsportal/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="http://localhost:8080/newsportal/dist/js/demo.js"></script>
+
+<script>
+    function setImage(name) {
+document.getElementById("myImage").value=name;
+    }
+</script>
 </body>
 </html>
