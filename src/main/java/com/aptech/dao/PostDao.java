@@ -65,35 +65,40 @@ public class PostDao {
         return status;
     }
 
-    //get category by id
-    public static Category getCategoryById(int categoryId) {
-        Category category = null;
-        String sql = "SELECT * FROM category WHERE id=?";
+    //get post by id
+    public static Post getCategoryById(int postId) {
+        Post post = null;
+        String sql = "SELECT * FROM posts WHERE id=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, categoryId);
+            ps.setInt(1, postId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                category = new Category();
-                category.setId(rs.getInt("id"));
-                category.setName(rs.getString("name"));
-                category.setCreatedAt(rs.getString("created_at"));
-                category.setUpdatedAt(rs.getString("updated_at"));
+                post = new Post();
+                post.setId(rs.getInt("id"));
+                post.setTitle(rs.getString("title"));
+                post.setText(rs.getString("text"));
+                post.setCategory(rs.getInt("category"));
+                post.setImage(rs.getString("image"));
+                post.setCreatedAt(rs.getString("created_at"));
+                post.setUpdatedAt(rs.getString("updated_at"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return category;
+        return post;
     }
 
-    //update category by id
-    public static int update(Category category) {
+    //update post by id
+    public static int update(Post post) {
         int status = 0;
-        String sql = "UPDATE category SET name=? WHERE id=?";
+        String sql = "UPDATE post SET title=?,text=?,category=?,image=? WHERE id=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, category.getName());
-            ps.setInt(2, category.getId());
+            ps.setString(1, post.getTitle());
+            ps.setString(2, post.getText());
+            ps.setInt(3,post.getCategory());
+            ps.setString(4,post.getImage());
             status = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -101,13 +106,13 @@ public class PostDao {
         return status;
     }
 
-    //delete category
-    public static int deleteCategory(int categoryId) {
-        String sql = "DELETE FROM category WHERE id=?";
+    //delete post
+    public static int deletePost(int postId) {
+        String sql = "DELETE FROM posts WHERE id=?";
         int status = 0;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, categoryId);
+            ps.setInt(1, postId);
             status = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -20,6 +20,6 @@ public class CategoryController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Category> categories= CategoryDao.getAllCategories();
         request.setAttribute("categories",categories);
-        request.getRequestDispatcher("category/posts.jsp").forward(request,response);
+        request.getRequestDispatcher("category/category.jsp").forward(request,response);
     }
 }

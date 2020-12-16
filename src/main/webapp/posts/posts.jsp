@@ -235,7 +235,7 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1 class="m-0 text-dark">All Posts
-                            <a class="btn btn-primary" href="/posts/create">New Post</a>
+                            <a class="btn btn-primary" href="/newsportal/posts/create">New Post</a>
                         </h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
@@ -273,7 +273,10 @@
                                     <tr>
                                         <td>${post.id}</td>
                                         <td>${post.title}</td>
-                                        <td>${post.category}</td>
+                                        <td>
+                                                ${post.category}
+
+                                        </td>
                                         <td>${post.createdAt}</td>
                                         <td>
                                             <div class="">
@@ -301,7 +304,7 @@
                                                                 Are sure want to delete this item?
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <form action="/newsportal/category" method="post">
+                                                                <form action="/newsportal/posts" method="post">
                                                                     <input type="hidden" name="id" value="${post.id}">
 
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
