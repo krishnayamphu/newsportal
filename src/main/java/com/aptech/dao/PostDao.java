@@ -39,6 +39,32 @@ public class PostDao {
         return posts;
     }
 
+    //return all posts by category
+    public static List<Post> getAllPostsByCategory(int categoryId) {
+        List<Post> category_posts = new ArrayList<>();
+        String sql = "SELECT * FROM posts WHERE category=?";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1,categoryId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Post post = new Post();
+                post.setId(rs.getInt("id"));
+                post.setCategory(rs.getInt("category"));
+                post.setTitle(rs.getString("title"));
+                post.setText(rs.getString("text"));
+                post.setImage(rs.getString("image"));
+                post.setCreatedAt(rs.getString("created_at"));
+                post.setUpdatedAt(rs.getString("updated_at"));
+                category_posts.add(post);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return category_posts;
+    }
+
     //save post
     public static boolean save(Post post) {
         boolean status = false;
@@ -66,7 +92,7 @@ public class PostDao {
     }
 
     //get post by id
-    public static Post getCategoryById(int postId) {
+    public static Post getPostById(int postId) {
         Post post = null;
         String sql = "SELECT * FROM posts WHERE id=?";
         try {
